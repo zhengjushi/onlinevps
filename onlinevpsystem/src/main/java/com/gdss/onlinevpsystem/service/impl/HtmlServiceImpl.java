@@ -16,4 +16,9 @@ public class HtmlServiceImpl implements HtmlService {
     public Html finById(Integer hId) {
         return repository.findById(hId).orElse(null);
     }
+
+    @Override
+    public Html save(Html html) {
+        return repository.save(html);
+    }
 }
