@@ -4,6 +4,8 @@ import com.gdss.onlinevpsystem.entity.Html;
 import com.gdss.onlinevpsystem.repository.HtmlRepository;
 import com.gdss.onlinevpsystem.service.HtmlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,5 +22,10 @@ public class HtmlServiceImpl implements HtmlService {
     @Override
     public Html save(Html html) {
         return repository.save(html);
+    }
+
+    @Override
+    public Page<Html> findAll(PageRequest pageRequest) {
+        return repository.findAll(pageRequest);
     }
 }
