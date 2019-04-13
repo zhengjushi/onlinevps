@@ -1,45 +1,44 @@
 package com.gdss.onlinevpsystem.controller;
 
 import com.gdss.onlinevpsystem.entity.Html;
+import com.gdss.onlinevpsystem.enums.Status;
 import com.gdss.onlinevpsystem.service.HtmlService;
+import com.gdss.onlinevpsystem.vo.ResultVO;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @Api(value = "HTML模块",description = "HTML模块的接口信息")
+@RequestMapping("/html")
 public class HtmlController {
 
     @Autowired
     private HtmlService service;
 
+    // 查询单个Html
     @ApiOperation(value = "获取标签信息",notes = "根据id获取标签信息")
-    @ApiImplicitParam(value = "用户ID",paramType = "path")
+    @ApiImplicitParam(value = "标签ID",paramType = "path")
     @GetMapping("/getHtmlById/{hId}")
     public Object getHtmlById(@PathVariable("hId")Integer hId){
-        Map<String, Object> map = new HashMap<>();
         Html html = service.finById(hId);
+        ResultVO vo = new ResultVO();
         if (html != null){
-            map.put("code",0);
-            map.put("msg","成功");
-            map.put("data",html);
-            return map;
+            vo.setCode(Status.SUCCESS.getCode());
+            vo.setMsg("获取成功");
+            vo.setData(html);
+            return vo;
         }else {
-            map.put("code",1);
-            map.put("msg","失败");
-            map.put("data",null);
-            return map;
+            vo.setCode(1);
+            vo.setMsg("获取失败");
+            vo.setData(html);
+            return vo;
         }
     }
 
+    // 增
     @ApiOperation(value = "添加HTML标签",notes = "根据传入的信息添加标签")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "hName", value = "标签名称", required = true,dataType = "string", paramType = "query"),
@@ -48,31 +47,48 @@ public class HtmlController {
     })
     @PostMapping("/save")
     public Object save(Html html){
-        Map<String, Object> map = new HashMap<>();
         Html save = service.save(html);
-        if (html != null){
-            map.put("code",0);
-            map.put("msg","添加成功");
-            map.put("data",save);
-            return map;
+        ResultVO vo = new ResultVO();
+        if (save != null){
+            vo.setCode(Status.SUCCESS.getCode());
+            vo.setMsg("成功");
+            vo.setData(save);
+            return vo;
         }else {
-            map.put("code", 1);
-            map.put("msg", "添加失败");
-            map.put("data", save);
-            return map;
+            vo.setCode(Status.UNSUCCESS.getCode());
+            vo.setMsg("添加失败");
+            vo.setData(save);
+            return vo;
         }
     }
 
-    @GetMapping("/findall/{pageNumber}")
+    // 分页
+    @GetMapping("/findall")
     @ApiOperation(value = "获取所有标签",notes = "分页获取所有标签")
-    @ApiImplicitParam(value = "页码",paramType = "path")
-    public Object findAll(@PathVariable("pageNumber")Integer pageNumber){
-        Page<Html> page = service.findAll(PageRequest.of(pageNumber,2));
-        Map<String,Object> map = new HashMap<>();
-        map.put("page",page);
-        map.put("code",0);
-        map.put("msg","成功");
-        return map;
+    public Object findAll( ){
+        List<Html> list = service.findAll();
+        ResultVO vo = new ResultVO();
+        if (list != null) {
+            vo.setCode(Status.SUCCESS.getCode());
+            vo.setMsg("成功");
+            vo.setData(list);
+        }
+        return vo;
+    }
+
+
+    @DeleteMapping("/delete/{hId}")
+    @ApiImplicitParam(value = "标签ID",paramType = "path")
+    public Object delete(@PathVariable("hId")Integer hId){
+        Html html = service.finById(hId);
+        ResultVO vo = new ResultVO();
+        if (html != null) {
+            service.delete(hId);
+            vo.setCode(Status.SUCCESS.getCode());
+            vo.setMsg("删除成功");
+            vo.setData(null);
+        }
+        return vo;
     }
 
 

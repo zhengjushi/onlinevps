@@ -8,8 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HtmlServiceImpl implements HtmlService {
+
 
     @Autowired
     private HtmlRepository repository;
@@ -28,4 +31,16 @@ public class HtmlServiceImpl implements HtmlService {
     public Page<Html> findAll(PageRequest pageRequest) {
         return repository.findAll(pageRequest);
     }
+
+    @Override
+    public List<Html> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void delete(Integer hId) {
+        repository.deleteById(hId);
+    }
+
+
 }
