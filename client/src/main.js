@@ -1,10 +1,9 @@
+import '@babel/polyfill'
 import Vue from 'vue'
 import './plugins/axios'
+import './plugins/bootstrap-vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
-import '@/assets/css/icon.css'
-import 'babel-polyfill'
 
 Vue.config.productionTip = false
 
