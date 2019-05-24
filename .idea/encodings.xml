@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+=======
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/onlinevpsystem" charset="UTF-8" />
+  </component>
+>>>>>>> cd0e6e9ceb2084e4d47422c7c712772fd7f5f3a1
 </project>

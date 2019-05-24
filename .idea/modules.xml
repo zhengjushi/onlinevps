@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/onlinevps.iml" filepath="$PROJECT_DIR$/.idea/onlinevps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/onlinevpsystem/onlinevpsystem.iml" filepath="$PROJECT_DIR$/onlinevpsystem/onlinevpsystem.iml" />
     </modules>
   </component>
 </project>
