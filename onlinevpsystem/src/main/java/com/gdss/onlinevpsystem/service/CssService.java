@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface CssService {
 
-    Css save(Css css);
+    Css findById(Integer id);
 
     List<Css> findAll();
 
-    void delete(Integer cId);
+    Integer insertOne(Css css);
 
-    Css findById(Integer cId);
+    Integer deleteOne(Integer id);
+
+    Integer updateOne(Css css);
 }

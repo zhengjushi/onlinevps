@@ -1,15 +1,14 @@
 package com.gdss.onlinevpsystem.vo;
 
-import com.gdss.onlinevpsystem.enums.Status;
 import lombok.Data;
 
 @Data
-public class ResultVO {
+public class ResultVO<T> {
 
-    private Integer code = Status.UNSUCCESS.getCode();
+    private Integer code ;
 
-    private String msg = "失败";
+    private String msg ;
 
-    private Object data = null;
+    private T data ;
 
 }

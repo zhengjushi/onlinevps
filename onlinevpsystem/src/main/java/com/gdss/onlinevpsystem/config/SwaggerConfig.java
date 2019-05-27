@@ -22,6 +22,6 @@ public class SwaggerConfig {
 
     public ApiInfo apiInfo(){
         Contact contact = new Contact("juju","http://www.baidu.com","15706639196@163.com");
-        return new ApiInfoBuilder().title("sell项目API接口").description("API接口").contact(contact).version("1.1.0").build();
+        return new ApiInfoBuilder().title("onlinevps项目API接口").description("API接口").contact(contact).version("1.1.0").build();
     }
 }
